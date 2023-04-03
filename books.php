@@ -171,7 +171,7 @@ if(!empty($_SESSION['search_result'])) {
                 
             </div>
 
-            <div>
+            <div class = "mt-3 w-100">
                 <?php include("./pagination.php");?>
             </div>
         </main>

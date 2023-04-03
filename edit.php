@@ -5,7 +5,7 @@ require './handler/function.php';
 if(is_not_logged_in()) {
     redirect_to('./index.php');
 }
-
+$_SESSION['id'] = $_GET['id'];
 $book = get_book_by_id($_GET['id']);
 
 ?>
@@ -45,9 +45,16 @@ $book = get_book_by_id($_GET['id']);
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
             </h1>
-
         </div>
-        <form action="">
+
+        <?php if (isset($_SESSION['danger'])) {
+                                display_flash_message("danger");
+                            } elseif (isset($_SESSION['success'])) {
+                                display_flash_message("success");
+                            }
+                            ?>
+
+        <form action="./handler/edit_handler.php" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -74,7 +81,7 @@ $book = get_book_by_id($_GET['id']);
                                     <textarea id="simpleinput" name="annotation" class="form-control"><?php echo $book['annotation'];?></textarea>
                                 </div>
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
-                                    <button class="btn btn-warning">Редактировать</button>
+                                    <button class="btn btn-warning" type="submit">Редактировать</button>
                                 </div>
                             </div>
                         </div>

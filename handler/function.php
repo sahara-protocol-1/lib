@@ -61,6 +61,13 @@ function create_new_book($book_name, $publishing_year, $author, $annotation) {
     return $pdo->lastInsertId();
 };
 
+function update_book($book_id, $book_name, $publishing_year, $author, $annotation) { 
+    $pdo = connecting();
+    $sql = 'UPDATE books SET book_name=(:book_name), publishing_year=(:publishing_year), author=(:author), annotation=(:annotation) WHERE id=:id';
+    $statement = $pdo->prepare($sql);
+    $statement->execute(['book_name' => $book_name, 'publishing_year' => $publishing_year, 'author' => $author, 'annotation' => $annotation, 'id' => $book_id]);
+};
+
 function set_flash_message($error, $message){ 
     $_SESSION[$error] = $message;
 };
