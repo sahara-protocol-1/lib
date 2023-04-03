@@ -114,11 +114,15 @@ if(!empty($_SESSION['search_result'])) {
                     </div>
                 </div>
             </div>
-            <div class="row" id="js-contacts">
+            <div class = "mb-3 w-100">
+                <?php include("./pagination.php");?>
+            </div>
 
+
+            <div class="row" id="js-contacts">
             <?php foreach($books as $book): ?>
                 <div class="col-xl-4">
-                    <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="oliver kopyov">
+                    <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" >
                         <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             <div class="d-flex flex-row align-items-center">
 
