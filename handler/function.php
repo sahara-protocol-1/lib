@@ -99,6 +99,15 @@ function data_fields_empty($book_name, $publishing_year, $author, $annotation) {
     };
 }
 
+function sql_injection_filter($data){
+    $data = trim($data, "*;!'\"-`()[]| "); // удаляем сначала и сконца строки символы
+    $data = str_replace([";--", "; --", "; -", "''", "``", ";`", "; `"], "", $data); // удаляем внутри строки сочетание символов
+    $data = preg_replace('/\s+/', ' ', $data); // удаляем пробелы внутри строки повторяющиеся, оставляем только один
+    $data = preg_replace('/(.)\\1+/', '$1', $data); // удаляем повторяющиеся знаки минус --, оставляем только один
+
+    return $data;
+}
+
 function count_row($table) { 
     $pdo = connecting();
     $sql = "SELECT COUNT(*) FROM $table"; 

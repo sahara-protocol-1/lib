@@ -14,6 +14,11 @@ $publishing_year = $_POST['publishing_year'];
 $author = $_POST['author'];
 $annotation = $_POST['annotation'];
 
+$book_name = sql_injection_filter($book_name);
+$publishing_year = sql_injection_filter($publishing_year);
+$author = sql_injection_filter($author);
+$annotation = sql_injection_filter($annotation);
+
 if(data_fields_empty($book_name, $publishing_year, $author, $annotation)) {
     set_flash_message("danger", "заполните все поля");
     redirect_to("../edit.php?id=$book_id");
